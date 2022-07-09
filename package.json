@@ -6,12 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "moralis:sync": "moralis-admin-cli connect-local-devchain --chain hardhat --moralisSubdomain ls46bb2lmuga.usemoralis.com --frpcPath ./frp/frpc"
   },
   "dependencies": {
+    "@web3uikit/core": "^0.1.12",
+    "@web3uikit/icons": "^0.1.12",
+    "@web3uikit/web3": "^0.1.9",
+    "dotenv": "^16.0.3",
+    "magic-sdk": "^10.0.0",
+    "moralis-v1": "^1.11.0",
     "next": "12.3.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-moralis": "^1.4.2"
   },
   "devDependencies": {
     "eslint": "8.24.0",
