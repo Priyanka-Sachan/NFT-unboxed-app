@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "moralis:sync": "moralis-admin-cli connect-local-devchain --chain hardhat --moralisSubdomain ls46bb2lmuga.usemoralis.com --frpcPath ./frp/frpc"
+    "moralis:sync": "moralis-admin-cli connect-local-devchain --chain hardhat --frpcPath ./frp/frpc",
+    "moralis:cloud": "moralis-admin-cli watch-cloud-file ./cloud/updateActiveItems.js"
   },
   "dependencies": {
     "@web3uikit/core": "^0.1.12",
