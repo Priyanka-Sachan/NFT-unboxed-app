@@ -1,8 +1,9 @@
 import { useState } from "react"
+import { useRouter } from "next/router"
 import Moralis from "moralis-v1"
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { ethers } from "ethers"
-import { ConnectButton, IPFSInput } from "@web3uikit/web3"
+import { IPFSInput } from "@web3uikit/web3"
 import { Form, useNotification } from "@web3uikit/core"
 import styles from "../styles/CreateNft.module.css"
 import { Header } from "../components/Header"
@@ -10,7 +11,8 @@ import nftCollectionAbi from "../constants/NftCollection.json"
 import contractAddresses from "../constants/networkMapping.json"
 
 export default function CreateNft() {
-	const { chainId, account, isWeb3Enabled } = useMoralis()
+	const router = useRouter()
+	const { chainId, isWeb3Enabled } = useMoralis()
 	const chainString = chainId ? parseInt(chainId).toString() : "31337"
 	const dispatch = useNotification()
 	const { runContractFunction } = useWeb3Contract()
@@ -64,8 +66,10 @@ export default function CreateNft() {
 				title: "NFT Minted",
 				position: "topR",
 			})
+			router.push("/your-nft")
 		}
 	}
+
 	return (
 		<div>
 			<Header />

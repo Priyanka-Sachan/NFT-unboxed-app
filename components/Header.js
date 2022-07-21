@@ -10,6 +10,9 @@ export function Header() {
 			<Link href="/explore">
 				<a>Explore</a>
 			</Link>
+			<Link href="/your-nft">
+				<a>Your NFT</a>
+			</Link>
 			<Link href="/create-nft">
 				<a>Create NFT</a>
 			</Link>
