@@ -14,12 +14,15 @@
     "@web3uikit/core": "^0.1.12",
     "@web3uikit/icons": "^0.1.12",
     "@web3uikit/web3": "^0.1.9",
+    "bootstrap": "^5.2.2",
     "dotenv": "^16.0.3",
     "magic-sdk": "^10.0.0",
     "moralis-v1": "^1.11.0",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-moralis": "^1.4.2"
+    "react-moralis": "^1.4.2",
+    "reactstrap": "^9.1.4",
+    "sass": "^1.55.0"
   }
 }

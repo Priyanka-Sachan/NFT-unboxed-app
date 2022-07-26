@@ -1,25 +1,77 @@
-import Link from "next/link"
-import { ConnectButton } from "@web3uikit/web3"
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  Container,
+  NavLink,
+} from "reactstrap";
+import { ConnectButton } from "@web3uikit/web3";
 
-export function Header() {
-	return (
-		<nav>
-			<Link href="/">
-				<a>NFT Unboxed</a>
-			</Link>
-			<Link href="/explore">
-				<a>Explore</a>
-			</Link>
-			<Link href="/your-nft">
-				<a>Your NFT</a>
-			</Link>
-			<Link href="/create-nft">
-				<a>Create NFT</a>
-			</Link>
-			<Link href="/sell-nft">
-				<a>Sell NFT</a>
-			</Link>
-			<ConnectButton />
-		</nav>
-	)
-}
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const toggle = () => setIsOpen(!isOpen);
+  return (
+    <div className="topbar" id="top">
+      <div className="header6">
+        <Container className="po-relative">
+          <Navbar className="navbar-expand-lg h6-nav-bar">
+            <NavbarBrand href="/">
+              <h3>NFT Unboxed</h3>
+            </NavbarBrand>
+            <NavbarToggler onClick={toggle}>
+              <span className="ti-menu"></span>
+            </NavbarToggler>
+            <Collapse
+              isOpen={isOpen}
+              navbar
+              className="hover-dropdown ml-auto"
+              id="h6-info"
+              style={{ justifyContent: 'flex-end' }}
+            >
+              <Nav navbar className="ml-auto">
+                <NavItem>
+                  <Link href="/explore">
+                    <a
+                      className={
+                        router.pathname == "/"
+                          ? "text-white nav-link"
+                          : "nav-link"
+                      }
+                    >
+                      Explore
+                    </a>
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link href="/your-nft">
+                    <a
+                      className={
+                        router.pathname == "/basic"
+                          ? "text-white nav-link"
+                          : "nav-link"
+                      }
+                    >
+                      Your NFTs
+                    </a>
+                  </Link>
+                </NavItem>
+              </Nav>
+              <ConnectButton />
+            </Collapse>
+          </Navbar>
+        </Container>
+      </div>
+    </div>
+  );
+};
+
+export default Header;
+
