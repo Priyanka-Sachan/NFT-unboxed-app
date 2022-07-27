@@ -4,7 +4,7 @@ import Image from "next/image"
 import { Card, useNotification } from "@web3uikit/core"
 import { ethers } from "ethers"
 import nftMarketplaceAbi from "../constants/NftMarketplace.json"
-import nftAbi from "../constants/BasicNft.json"
+import nftAbi from "../constants/NftCollection.json"
 import UpdateListingModal from "./UpdateListingModal"
 
 const truncateString = (fullStr, strLen) => {
@@ -76,11 +76,11 @@ export default function NFTCard({ marketplaceAddress, nftAddress, tokenId, selle
 		isOwnedByUser
 			? setShowModal(true)
 			: buyItem({
-					onError: (error) => {
-						console.log(error)
-					},
-					onSuccess: handleBuyItemSuccess,
-			  })
+				onError: (error) => {
+					console.log(error)
+				},
+				onSuccess: handleBuyItemSuccess,
+			})
 	}
 
 	const handleBuyItemSuccess = async (tx) => {
@@ -94,7 +94,7 @@ export default function NFTCard({ marketplaceAddress, nftAddress, tokenId, selle
 	}
 
 	return (
-		<div>
+		<div className="m-2">
 			<div>
 				{imageURI ? (
 					<div>
@@ -110,10 +110,10 @@ export default function NFTCard({ marketplaceAddress, nftAddress, tokenId, selle
 							description={tokenDescription}
 							onClick={handleCardClick}
 						>
-							<div>
-								<div>
+							<div className="p-2">
+								<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
 									<div>#{tokenId}</div>
-									<div>Owned by {formattedSellerAddress}</div>
+									<div className="italic text-sm">Owned by {formattedSellerAddress}</div>
 									<Image
 										loader={() => imageURI}
 										src={imageURI}

@@ -1,7 +1,7 @@
 import styles from "../styles/Explore.module.css"
 import { useMoralisQuery, useMoralis } from "react-moralis"
 import NFTCard from "../components/NFTCard"
-import { Header } from "../components/Header"
+import { Container } from "reactstrap"
 
 export default function Home() {
 	const { isWeb3Enabled } = useMoralis()
@@ -13,10 +13,9 @@ export default function Home() {
 	)
 
 	return (
-		<div>
-			<Header />
+		<Container className="pt-5">
 			<h1>Recently Listed</h1>
-			<div>
+			<div style={{ display: "flex" }}>
 				{isWeb3Enabled ? (
 					fetchingListedNfts ? (
 						<div>Loading...</div>
@@ -40,6 +39,6 @@ export default function Home() {
 					<div>Web3 Currently Not Enabled</div>
 				)}
 			</div>
-		</div>
+		</Container>
 	)
 }

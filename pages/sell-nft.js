@@ -2,15 +2,15 @@ import { useEffect, useState } from "react"
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { ethers } from "ethers"
 import { Form, useNotification, Button } from "@web3uikit/core"
-import nftAbi from "../constants/BasicNft.json"
+import nftAbi from "../constants/NftCollection.json"
 import nftMarketplaceAbi from "../constants/NftMarketplace.json"
 import networkMapping from "../constants/networkMapping.json"
-import { Header } from "../components/Header"
+import { Container } from "reactstrap"
 
 export default function SellNft() {
 	const { chainId, account, isWeb3Enabled } = useMoralis()
 	const chainString = chainId ? parseInt(chainId).toString() : "31337"
-	const marketplaceAddress = networkMapping[chainString].NftMarketplace[0]
+	const marketplaceAddress = networkMapping[chainString].NftMarketplace
 	const dispatch = useNotification()
 	const { runContractFunction } = useWeb3Contract()
 
@@ -22,6 +22,7 @@ export default function SellNft() {
 		const tokenId = data.data[1].inputResult
 		const price = ethers.utils.parseUnits(data.data[2].inputResult, "ether").toString()
 
+		console.log("@1")
 		const approveOptions = {
 			abi: nftAbi,
 			contractAddress: nftAddress,
@@ -31,7 +32,7 @@ export default function SellNft() {
 				tokenId: tokenId,
 			},
 		}
-
+		console.log(approveOptions)
 		await runContractFunction({
 			params: approveOptions,
 			onSuccess: () => handleApproveSuccess(nftAddress, tokenId, price),
@@ -102,8 +103,8 @@ export default function SellNft() {
 	}, [proceeds, account, isWeb3Enabled, chainId])
 
 	return (
-		<div>
-			<Header />
+		<Container className="pt-5">
+			<h1>Sell NFT</h1>
 			<Form
 				onSubmit={approveAndList}
 				data={[
@@ -127,30 +128,33 @@ export default function SellNft() {
 						key: "price",
 					},
 				]}
-				title="Sell your NFT!"
 				id="Main Form"
 			/>
-			<div>Withdraw {proceeds} proceeds</div>
+			<hr></hr>
+			<h1>N get your money</h1>
 			{proceeds != "0" ? (
-				<Button
-					onClick={() => {
-						runContractFunction({
-							params: {
-								abi: nftMarketplaceAbi,
-								contractAddress: marketplaceAddress,
-								functionName: "withdrawProceeds",
-								params: {},
-							},
-							onError: (error) => console.log(error),
-							onSuccess: handleWithdrawSuccess,
-						})
-					}}
-					text="Withdraw"
-					type="button"
-				/>
+				<div>
+					<div>Withdraw {proceeds} proceeds</div>
+					<Button
+						onClick={() => {
+							runContractFunction({
+								params: {
+									abi: nftMarketplaceAbi,
+									contractAddress: marketplaceAddress,
+									functionName: "withdrawProceeds",
+									params: {},
+								},
+								onError: (error) => console.log(error),
+								onSuccess: handleWithdrawSuccess,
+							})
+						}}
+						text="Withdraw"
+						type="button"
+					/>
+				</div>
 			) : (
 				<div>No proceeds detected</div>
 			)}
-		</div>
+		</Container>
 	)
 }

@@ -41,9 +41,9 @@ const Header = () => {
                   <Link href="/explore">
                     <a
                       className={
-                        router.pathname == "/"
-                          ? "text-white nav-link"
-                          : "nav-link"
+                        router.pathname == "/explore"
+                          ? "nav-link text-dark"
+                          : "nav-link text-muted"
                       }
                     >
                       Explore
@@ -51,15 +51,41 @@ const Header = () => {
                   </Link>
                 </NavItem>
                 <NavItem>
+                  <Link href="/create-nft">
+                    <a
+                      className={
+                        router.pathname == "/create-nft"
+                          ? "nav-link text-dark"
+                          : "nav-link text-muted"
+                      }
+                    >
+                      Create
+                    </a>
+                  </Link>
+                </NavItem>
+                <NavItem>
                   <Link href="/your-nft">
                     <a
                       className={
-                        router.pathname == "/basic"
-                          ? "text-white nav-link"
-                          : "nav-link"
+                        router.pathname == "/your-nft"
+                          ? "nav-link text-dark"
+                          : "nav-link text-muted"
                       }
                     >
-                      Your NFTs
+                      View
+                    </a>
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link href="/sell-nft">
+                    <a
+                      className={
+                        router.pathname == "/sell-nft"
+                          ? "nav-link text-dark"
+                          : "nav-link text-muted"
+                      }
+                    >
+                      Sell
                     </a>
                   </Link>
                 </NavItem>

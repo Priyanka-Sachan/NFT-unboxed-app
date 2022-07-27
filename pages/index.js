@@ -42,7 +42,7 @@ export default function Home() {
 								<a
 									className="btn btn-light btn-rounded btn-md m-t-20"
 									data-toggle="collapse"
-									href=""
+									href="/explore"
 								>
 									<span>Explore trending NFTs?</span>
 								</a>

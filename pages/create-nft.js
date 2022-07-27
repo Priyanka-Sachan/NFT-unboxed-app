@@ -6,9 +6,9 @@ import { ethers } from "ethers"
 import { IPFSInput } from "@web3uikit/web3"
 import { Form, useNotification } from "@web3uikit/core"
 import styles from "../styles/CreateNft.module.css"
-import { Header } from "../components/Header"
 import nftCollectionAbi from "../constants/NftCollection.json"
 import contractAddresses from "../constants/networkMapping.json"
+import { Container } from "reactstrap"
 
 export default function CreateNft() {
 	const router = useRouter()
@@ -47,6 +47,7 @@ export default function CreateNft() {
 				price: price,
 			},
 		}
+		console.log(mintOptions)
 
 		await runContractFunction({
 			params: mintOptions,
@@ -71,8 +72,7 @@ export default function CreateNft() {
 	}
 
 	return (
-		<div>
-			<Header />
+		<Container className="pt-5">
 			{isWeb3Enabled ? (
 				<div>
 					<h1>Create NFT</h1>
@@ -142,6 +142,6 @@ export default function CreateNft() {
 					<h3>Connect to wallet to mint NFT</h3>
 				</div>
 			)}
-		</div>
+		</Container>
 	)
 }
