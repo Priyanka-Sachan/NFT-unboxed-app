@@ -24,7 +24,7 @@ const Header = () => {
         <Container className="po-relative">
           <Navbar className="navbar-expand-lg h6-nav-bar">
             <NavbarBrand href="/">
-              <h3>NFT Unboxed</h3>
+              <h1 style={{margin:"0px"}}>NFT Unboxed</h1>
             </NavbarBrand>
             <NavbarToggler onClick={toggle}>
               <span className="ti-menu"></span>

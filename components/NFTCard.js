@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react"
 import { useWeb3Contract, useMoralis } from "react-moralis"
+import { useRouter } from "next/router"
 import Image from "next/image"
-import { Card, useNotification } from "@web3uikit/core"
+import { Card } from "@web3uikit/core"
 import { ethers } from "ethers"
-import nftMarketplaceAbi from "../constants/NftMarketplace.json"
 import nftAbi from "../constants/NftCollection.json"
-import UpdateListingModal from "./UpdateListingModal"
 
 const truncateString = (fullStr, strLen) => {
 	if (fullStr.length <= strLen) return fullStr
@@ -22,30 +21,17 @@ const truncateString = (fullStr, strLen) => {
 }
 
 export default function NFTCard({ marketplaceAddress, nftAddress, tokenId, seller, price }) {
+	const router = useRouter()
 	const { isWeb3Enabled, account } = useMoralis()
 	const [imageURI, setImageURI] = useState("")
 	const [tokenName, setTokenName] = useState("")
 	const [tokenDescription, setTokenDescription] = useState("")
-	const [showModal, setShowModal] = useState(false)
-	const hideModal = () => setShowModal(false)
-	const dispatch = useNotification()
 
 	const { runContractFunction: getTokenURI } = useWeb3Contract({
 		abi: nftAbi,
 		contractAddress: nftAddress,
 		functionName: "tokenURI",
 		params: {
-			tokenId: tokenId,
-		},
-	})
-
-	const { runContractFunction: buyItem } = useWeb3Contract({
-		abi: nftMarketplaceAbi,
-		contractAddress: marketplaceAddress,
-		functionName: "buyItem",
-		msgValue: price,
-		params: {
-			nftAddress: nftAddress,
 			tokenId: tokenId,
 		},
 	})
@@ -73,24 +59,7 @@ export default function NFTCard({ marketplaceAddress, nftAddress, tokenId, selle
 	const formattedSellerAddress = isOwnedByUser ? "you" : truncateString(seller || "", 15)
 
 	const handleCardClick = () => {
-		isOwnedByUser
-			? setShowModal(true)
-			: buyItem({
-				onError: (error) => {
-					console.log(error)
-				},
-				onSuccess: handleBuyItemSuccess,
-			})
-	}
-
-	const handleBuyItemSuccess = async (tx) => {
-		await tx.wait(1)
-		dispatch({
-			type: "success",
-			message: "Item bought!",
-			title: "Item Bought",
-			position: "topR",
-		})
+		router.push(`/nft/${nftAddress}^${tokenId}`)
 	}
 
 	return (
@@ -98,22 +67,23 @@ export default function NFTCard({ marketplaceAddress, nftAddress, tokenId, selle
 			<div>
 				{imageURI ? (
 					<div>
-						<UpdateListingModal
-							isVisible={showModal}
-							marketplaceAddress={marketplaceAddress}
-							nftAddress={nftAddress}
-							tokenId={tokenId}
-							onClose={hideModal}
-						/>
 						<Card
 							title={tokenName}
 							description={tokenDescription}
 							onClick={handleCardClick}
 						>
 							<div className="p-2">
-								<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+								<div
+									style={{
+										display: "flex",
+										flexDirection: "column",
+										alignItems: "flex-end",
+									}}
+								>
 									<div>#{tokenId}</div>
-									<div className="italic text-sm">Owned by {formattedSellerAddress}</div>
+									<div className="italic text-sm">
+										Owned by {formattedSellerAddress}
+									</div>
 									<Image
 										loader={() => imageURI}
 										src={imageURI}

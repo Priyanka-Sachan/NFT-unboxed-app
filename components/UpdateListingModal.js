@@ -40,6 +40,7 @@ export default function UpdateListingModal({
 
 	return (
 		<Modal
+			title="Update NFT"
 			isVisible={isVisible}
 			onCancel={onClose}
 			onCloseButtonPressed={onClose}
@@ -53,14 +54,20 @@ export default function UpdateListingModal({
 				})
 			}}
 		>
-			<Input
-				label="Update listing price in L1 Currency (ETH)"
-				name="New listing price"
-				type="number"
-				onChange={(event) => {
-					setPriceToUpdateListingWith(event.target.value)
+			<div
+				style={{
+					padding: "20px 0 20px 0",
 				}}
-			/>
+			>
+				<Input
+					label="Update listing price in L1 Currency (ETH)"
+					name="New listing price"
+					type="number"
+					onChange={(event) => {
+						setPriceToUpdateListingWith(event.target.value)
+					}}
+				/>
+			</div>
 		</Modal>
 	)
 }
