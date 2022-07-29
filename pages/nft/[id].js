@@ -1,4 +1,4 @@
-import Head from "next/head"
+import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 import { useMoralis, useMoralisQuery, useWeb3Contract } from "react-moralis"
 import { useNotification, Button } from "@web3uikit/core"
@@ -9,6 +9,7 @@ import Image from "next/image"
 import { Container } from "reactstrap"
 
 export default function Nft({ nftAddress, tokenId }) {
+	const router = useRouter()
 	const { isWeb3Enabled, account } = useMoralis()
 	const { fetch: getNft } = useMoralisQuery(
 		"ActiveItem",
@@ -97,13 +98,43 @@ export default function Nft({ nftAddress, tokenId }) {
 		setShowModal(true)
 	}
 
+	const { runContractFunction: cancelItem } = useWeb3Contract({
+		abi: nftMarketplaceAbi,
+		contractAddress: marketplaceAddress,
+		functionName: "cancelItem",
+		params: {
+			nftAddress: nftAddress,
+			tokenId: tokenId,
+		},
+	})
+
+	function cancelNftHandler() {
+		cancelItem({
+			onError: (error) => {
+				console.log(error)
+			},
+			onSuccess: handleCancelItemSuccess,
+		})
+	}
+
+	const handleCancelItemSuccess = async (tx) => {
+		await tx.wait(1)
+		dispatch({
+			type: "success",
+			message: "Item canceled!",
+			title: "Item Canceled",
+			position: "topR",
+		})
+		router.replace("/your-nft")
+	}
+
 	useEffect(() => {
 		if (isWeb3Enabled) updateUI()
 	}, [isWeb3Enabled])
 
 	return (
 		<Container className="pt-5">
-      <div style={{height:"100px"}}></div>
+			<div style={{ height: "100px" }}></div>
 			{isWeb3Enabled ? (
 				<div>
 					<UpdateListingModal
@@ -119,7 +150,7 @@ export default function Nft({ nftAddress, tokenId }) {
 							{nftAddress}#{tokenId}
 						</h3>
 						<h4 className="italics"> Owned by {seller}</h4>
-            <h4>Buy at {price}</h4>
+						<h4>Buy at {price}</h4>
 						<Image
 							loader={() => imageURI}
 							src={imageURI}
@@ -135,8 +166,7 @@ export default function Nft({ nftAddress, tokenId }) {
 									theme="secondary"
 									onClick={updateNftHandler}
 								/>
-								{/* TO DO */}
-								<Button text="CANCEL" theme="outline" />
+								<Button text="CANCEL" theme="outline" onClick={cancelNftHandler} />
 							</div>
 						) : (
 							<Button text="BUY NFT" theme="secondary" onClick={buyNftHandler} />
