@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 import { useMoralis, useMoralisQuery, useWeb3Contract } from "react-moralis"
-import { useNotification, Button } from "@web3uikit/core"
+import { useNotification, Button, Loading } from "@web3uikit/core"
 import UpdateListingModal from "../../components/UpdateListingModal"
 import nftMarketplaceAbi from "../../constants/NftMarketplace.json"
 import nftAbi from "../../constants/NftCollection.json"
@@ -132,10 +132,9 @@ export default function Nft({ nftAddress, tokenId }) {
 		if (isWeb3Enabled) updateUI()
 	}, [isWeb3Enabled])
 
-	return (
+	return isWeb3Enabled ? (
 		<Container className="pt-5">
-			<div style={{ height: "100px" }}></div>
-			{isWeb3Enabled ? (
+			{tokenName ? (
 				<div>
 					<UpdateListingModal
 						isVisible={showModal}
@@ -174,10 +173,12 @@ export default function Nft({ nftAddress, tokenId }) {
 					</div>
 				</div>
 			) : (
-				<h3>Connect to Wallet</h3>
+				<center style={{ marginTop: "100px" }}>
+					<Loading size={12} spinnerColor="#2E7DAF" spinnerType="wave" />
+				</center>
 			)}
 		</Container>
-	)
+	) : null
 }
 
 export async function getServerSideProps(context) {

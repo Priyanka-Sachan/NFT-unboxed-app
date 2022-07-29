@@ -104,57 +104,61 @@ export default function SellNft() {
 
 	return (
 		<Container className="pt-5">
-			<h1>Sell NFT</h1>
-			<Form
-				onSubmit={approveAndList}
-				data={[
-					{
-						name: "NFT Address",
-						type: "text",
-						inputWidth: "50%",
-						value: "",
-						key: "nftAddress",
-					},
-					{
-						name: "Token ID",
-						type: "number",
-						value: "",
-						key: "tokenId",
-					},
-					{
-						name: "Price (in ETH)",
-						type: "number",
-						value: "",
-						key: "price",
-					},
-				]}
-				id="Main Form"
-			/>
-			<hr></hr>
-			<h1>N get your money</h1>
-			{proceeds != "0" ? (
+			{isWeb3Enabled ? (
 				<div>
-					<div>Withdraw {proceeds} proceeds</div>
-					<Button
-						onClick={() => {
-							runContractFunction({
-								params: {
-									abi: nftMarketplaceAbi,
-									contractAddress: marketplaceAddress,
-									functionName: "withdrawProceeds",
-									params: {},
-								},
-								onError: (error) => console.log(error),
-								onSuccess: handleWithdrawSuccess,
-							})
-						}}
-						text="Withdraw"
-						type="button"
+					<h1>Sell NFT</h1>
+					<Form
+						onSubmit={approveAndList}
+						data={[
+							{
+								name: "NFT Address",
+								type: "text",
+								inputWidth: "50%",
+								value: "",
+								key: "nftAddress",
+							},
+							{
+								name: "Token ID",
+								type: "number",
+								value: "",
+								key: "tokenId",
+							},
+							{
+								name: "Price (in ETH)",
+								type: "number",
+								value: "",
+								key: "price",
+							},
+						]}
+						id="Main Form"
 					/>
+					<hr></hr>
+					<h1>N get your money</h1>
+					{proceeds != "0" ? (
+						<div>
+							<div>Withdraw {proceeds} proceeds</div>
+							<Button
+								onClick={() => {
+									runContractFunction({
+										params: {
+											abi: nftMarketplaceAbi,
+											contractAddress: marketplaceAddress,
+											functionName: "withdrawProceeds",
+											params: {},
+										},
+										onError: (error) => console.log(error),
+										onSuccess: handleWithdrawSuccess,
+									})
+								}}
+								text="Withdraw"
+								type="button"
+							/>
+						</div>
+					) : (
+						<div>No proceeds detected</div>
+					)}
 				</div>
-			) : (
-				<div>No proceeds detected</div>
-			)}
+			) : null}
 		</Container>
 	)
 }

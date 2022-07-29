@@ -1,4 +1,3 @@
-import Head from "next/head"
 import styles from "../styles/Home.module.css"
 import React from "react"
 import { Row, Col, Container, Card, CardBody } from "reactstrap"
@@ -19,276 +18,261 @@ import img6 from "../assets/images/img6.jpg"
 export default function Home() {
 	return (
 		<div>
-			<Head>
-				<title>NFT Unboxed</title>
-				<meta name="description" content="Rummage through the NFTs in ETH ecosystem" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-			<div>
-				<div className="static-slider10">
-					<Container>
-						<Row className="">
-							<Col md="6" className="align-self-center ">
-								<span className="label label-rounded label-inverse">
-									NFT MARKETPLACE
-								</span>
-								<h1 className="title">
-									Trade without platform fees on NFT Unboxed
-								</h1>
-								<h5 className="subtitle op-8">
-									NFT Unboxed is an NFT marketplace built on Ethereum. Create and
-									trade NFTs instantly with low network costs.
-								</h5>
-								<a
-									className="btn btn-light btn-rounded btn-md m-t-20"
-									data-toggle="collapse"
-									href="/explore"
-								>
-									<span>Explore trending NFTs?</span>
-								</a>
-							</Col>
-							<Col md="6">
-								<Image src={herobanner} alt="herobanner"></Image>
-							</Col>
-						</Row>
-					</Container>
-				</div>
-				<div className="spacer ">
-					<Container className="feature30">
-						<Row>
-							<Col lg="10">
-								<Image
-									src={img}
-									className="rounded img-responsive"
-									alt="wrappixel"
-								/>
-							</Col>
-							<Col lg="5" md="7" className="wrap-feature30-box">
-								<Card className="card-shadow">
-									<CardBody>
-										<div className="p-20">
-											<span className="label label-info label-rounded">
-												USE CASE
+			<div className="static-slider10">
+				<Container>
+					<Row className="">
+						<Col md="6" className="align-self-center ">
+							<span className="label label-rounded label-inverse">
+								NFT MARKETPLACE
+							</span>
+							<h1 className="title">Trade without platform fees on NFT Unboxed</h1>
+							<h5 className="subtitle op-8">
+								NFT Unboxed is an NFT marketplace built on Ethereum. Create and
+								trade NFTs instantly with low network costs.
+							</h5>
+							<a
+								className="btn btn-light btn-rounded btn-md m-t-20"
+								data-toggle="collapse"
+								href="/explore"
+							>
+								<span>Explore trending NFTs?</span>
+							</a>
+						</Col>
+						<Col md="6">
+							<Image src={herobanner} alt="herobanner"></Image>
+						</Col>
+					</Row>
+				</Container>
+			</div>
+			<div className="spacer ">
+				<Container className="feature30">
+					<Row>
+						<Col lg="10">
+							<Image src={img} className="rounded img-responsive" alt="wrappixel" />
+						</Col>
+						<Col lg="5" md="7" className="wrap-feature30-box">
+							<Card className="card-shadow">
+								<CardBody>
+									<div className="p-20">
+										<span className="label label-info label-rounded">
+											USE CASE
+										</span>
+										<h3 className="title">
+											What does NFT Unboxed help you do?
+										</h3>
+										<ol>
+											<li>View your on-chain NFTs</li>
+											<li>Create and mint NFTs in existing collections</li>
+											<li>Sell and buy NFTs that you ❤️</li>
+										</ol>
+										<a
+											className="btn btn-danger btn-md btn-arrow m-t-20"
+											href="/your-nft"
+										>
+											<span>
+												VIEW NFTs <i className="ti-arrow-right"></i>
 											</span>
-											<h3 className="title">
-												What does NFT Unboxed help you do?
-											</h3>
-											<ol>
-												<li>View your on-chain NFTs</li>
-												<li>
-													Create and mint NFTs in existing collections
-												</li>
-												<li>Sell and buy NFTs that you ❤️</li>
-											</ol>
-											<a
-												className="btn btn-danger btn-md btn-arrow m-t-20"
-												href="/your-nft"
-											>
-												<span>
-													VIEW NFTs <i className="ti-arrow-right"></i>
-												</span>
-											</a>
-										</div>
-									</CardBody>
-								</Card>
-							</Col>
-						</Row>
-					</Container>
-				</div>
-				<div className="testimonial3 spacer bg-light blog-home2">
-					<Container>
-						<Row className="justify-content-center">
-							<Col md="7" className="text-center">
-								<h2 className="title">Why NFT Unboxed</h2>
-							</Col>
-						</Row>
-						<Row className="testi3 m-t-40 justify-content-center">
-							<Col lg="3" md="6">
-								<Card className="card-shadow">
-									<CardBody>
-										<span className="thumb-img m-b-10 ">
-											<Image src={f1} alt="wrapkit" className="circle" />
-										</span>
-										<h4 className="font-medium ">Easy Connect</h4>
-										<h6 className="font-light m-b-30">
-											Using Metamask or CoinBase Wallet. Just click 'Connect
-											Wallet' on the top right to start.
-										</h6>
-									</CardBody>
-								</Card>
-							</Col>
-							<Col lg="3" md="6">
-								<Card className="card-shadow">
-									<CardBody>
-										<span className="thumb-img m-b-10 ">
-											<Image src={f2} alt="wrapkit" className="circle" />
-										</span>
-										<h4 className="font-medium ">Super Fast</h4>
-										<h6 className="font-light m-b-30">
-											Since Unboxed runs on the Ethereum Network,
-											transactions are confirmed within 1-2 seconds.
-										</h6>
-									</CardBody>
-								</Card>
-							</Col>
-							<Col lg="3" md="6">
-								<Card className="card-shadow">
-									<CardBody>
-										<span className="thumb-img m-b-10 ">
-											<Image src={f3} alt="wrapkit" className="circle" />
-										</span>
-										<h4 className="font-medium ">Low Transaction Fees</h4>
-										<h6 className="font-light m-b-30">
-											Transactions are just a few cents, allowing users to
-											create & trade NFTs without high network fees.
-										</h6>
-									</CardBody>
-								</Card>
-							</Col>
-							<Col lg="3" md="6">
-								<Card className="card-shadow">
-									<CardBody>
-										<span className="thumb-img m-b-10 ">
-											<Image src={f4} alt="wrapkit" className="circle" />
-										</span>
-										<h4 className="font-medium ">Zero Platform Fees</h4>
-										<h6 className="font-light m-b-30">
-											Trade NFTs via auction or direct offer without any fees
-											taken by Unboxed.
-										</h6>
-									</CardBody>
-								</Card>
-							</Col>
-						</Row>
-					</Container>
-				</div>
-				<div className="spacer">
-					<Container>
-						<Row className="justify-content-center">
-							<Col md="7" className="text-center">
-								<h2 className="title">Our Tending collections</h2>
-							</Col>
-						</Row>
-						<Row className="m-t-40">
-							<Col md="4">
-								<Card className="card-shadow">
-									<a href="#" className="img-ho">
-										<Image
-											className="card-img-top"
-											src={img1}
-											alt="wrappixel kit"
-										/>
-									</a>
-									<CardBody>
-										<h5 className="font-medium m-b-0">
-											Branding for Theme Designer
-										</h5>
-										<p className="m-b-0 font-14">Digital Marketing</p>
-									</CardBody>
-								</Card>
-							</Col>
-							<Col md="4">
-								<Card className="card-shadow">
-									<a href="#" className="img-ho">
-										<Image
-											className="card-img-top"
-											src={img2}
-											alt="wrappixel kit"
-										/>
-									</a>
-									<CardBody>
-										<h5 className="font-medium m-b-0">Button Designs Free</h5>
-										<p className="m-b-0 font-14">Search Engine</p>
-									</CardBody>
-								</Card>
-							</Col>
-							<Col md="4">
-								<Card className="card-shadow">
-									<a href="#" className="img-ho">
-										<Image
-											className="card-img-top"
-											src={img3}
-											alt="wrappixel kit"
-										/>
-									</a>
-									<CardBody>
-										<h5 className="font-medium m-b-0">Branding & Co Agency</h5>
-										<p className="m-b-0 font-14">Admin templates</p>
-									</CardBody>
-								</Card>
-							</Col>
-							<Col md="4">
-								<Card className="card-shadow">
-									<a href="#" className="img-ho">
-										<Image
-											className="card-img-top"
-											src={img4}
-											alt="wrappixel kit"
-										/>
-									</a>
-									<CardBody>
-										<h5 className="font-medium m-b-0">Zukandre Phoniex</h5>
-										<p className="m-b-0 font-14">Branding</p>
-									</CardBody>
-								</Card>
-							</Col>
-							<Col md="4">
-								<Card className="card-shadow">
-									<a href="#" className="img-ho">
-										<Image
-											className="card-img-top"
-											src={img5}
-											alt="wrappixel kit"
-										/>
-									</a>
-									<CardBody>
-										<h5 className="font-medium m-b-0">Sionage Mokcup</h5>
-										<p className="m-b-0 font-14">Wll Mockup</p>
-									</CardBody>
-								</Card>
-							</Col>
-							<Col md="4">
-								<Card className="card-shadow">
-									<a href="#" className="img-ho">
-										<Image
-											className="card-img-top"
-											src={img6}
-											alt="wrappixel kit"
-										/>
-									</a>
-									<CardBody>
-										<h5 className="font-medium m-b-0">Hard Cover Book Mock</h5>
-										<p className="m-b-0 font-14">Book Covers</p>
-									</CardBody>
-								</Card>
-							</Col>
-						</Row>
-					</Container>
-				</div>
-				<div className="static-slider3 bg-light">
-					<Container>
-						<Row className="justify-content-center">
-							<Col md="10" className="align-self-center text-center">
-								<h1 className="title">
-									I’m Priyanka Sachan, an{" "}
-									<b className="font-bold">
-										Student, Full-stack developer & Blockchain enthusiast
-									</b>
-									, Making{" "}
-								</h1>
-								<a
-									className="btn btn-danger btn-md btn-arrow m-t-20"
-									data-toggle="collapse"
-									href="https://github.com/Priyanka-Sachan/"
-								>
-									<span>
-										Checkout My Work <i className="ti-arrow-right"></i>
+										</a>
+									</div>
+								</CardBody>
+							</Card>
+						</Col>
+					</Row>
+				</Container>
+			</div>
+			<div className="testimonial3 spacer bg-light blog-home2">
+				<Container>
+					<Row className="justify-content-center">
+						<Col md="7" className="text-center">
+							<h2 className="title">Why NFT Unboxed</h2>
+						</Col>
+					</Row>
+					<Row className="testi3 m-t-40 justify-content-center">
+						<Col lg="3" md="6">
+							<Card className="card-shadow">
+								<CardBody>
+									<span className="thumb-img m-b-10 ">
+										<Image src={f1} alt="wrapkit" className="circle" />
 									</span>
+									<h4 className="font-medium ">Easy Connect</h4>
+									<h6 className="font-light m-b-30">
+										Using Metamask or CoinBase Wallet. Just click 'Connect
+										Wallet' on the top right to start.
+									</h6>
+								</CardBody>
+							</Card>
+						</Col>
+						<Col lg="3" md="6">
+							<Card className="card-shadow">
+								<CardBody>
+									<span className="thumb-img m-b-10 ">
+										<Image src={f2} alt="wrapkit" className="circle" />
+									</span>
+									<h4 className="font-medium ">Super Fast</h4>
+									<h6 className="font-light m-b-30">
+										Since Unboxed runs on the Ethereum Network, transactions
+										are confirmed within 1-2 seconds.
+									</h6>
+								</CardBody>
+							</Card>
+						</Col>
+						<Col lg="3" md="6">
+							<Card className="card-shadow">
+								<CardBody>
+									<span className="thumb-img m-b-10 ">
+										<Image src={f3} alt="wrapkit" className="circle" />
+									</span>
+									<h4 className="font-medium ">Low Transaction Fees</h4>
+									<h6 className="font-light m-b-30">
+										Transactions are just a few cents, allowing users to create
+										& trade NFTs without high network fees.
+									</h6>
+								</CardBody>
+							</Card>
+						</Col>
+						<Col lg="3" md="6">
+							<Card className="card-shadow">
+								<CardBody>
+									<span className="thumb-img m-b-10 ">
+										<Image src={f4} alt="wrapkit" className="circle" />
+									</span>
+									<h4 className="font-medium ">Zero Platform Fees</h4>
+									<h6 className="font-light m-b-30">
+										Trade NFTs via auction or direct offer without any fees
+										taken by Unboxed.
+									</h6>
+								</CardBody>
+							</Card>
+						</Col>
+					</Row>
+				</Container>
+			</div>
+			<div className="spacer">
+				<Container>
+					<Row className="justify-content-center">
+						<Col md="7" className="text-center">
+							<h2 className="title">Our Tending collections</h2>
+						</Col>
+					</Row>
+					<Row className="m-t-40">
+						<Col md="4">
+							<Card className="card-shadow">
+								<a href="#" className="img-ho">
+									<Image
+										className="card-img-top"
+										src={img1}
+										alt="wrappixel kit"
+									/>
 								</a>
-							</Col>
-						</Row>
-					</Container>
-				</div>
+								<CardBody>
+									<h5 className="font-medium m-b-0">
+										Branding for Theme Designer
+									</h5>
+									<p className="m-b-0 font-14">Digital Marketing</p>
+								</CardBody>
+							</Card>
+						</Col>
+						<Col md="4">
+							<Card className="card-shadow">
+								<a href="#" className="img-ho">
+									<Image
+										className="card-img-top"
+										src={img2}
+										alt="wrappixel kit"
+									/>
+								</a>
+								<CardBody>
+									<h5 className="font-medium m-b-0">Button Designs Free</h5>
+									<p className="m-b-0 font-14">Search Engine</p>
+								</CardBody>
+							</Card>
+						</Col>
+						<Col md="4">
+							<Card className="card-shadow">
+								<a href="#" className="img-ho">
+									<Image
+										className="card-img-top"
+										src={img3}
+										alt="wrappixel kit"
+									/>
+								</a>
+								<CardBody>
+									<h5 className="font-medium m-b-0">Branding & Co Agency</h5>
+									<p className="m-b-0 font-14">Admin templates</p>
+								</CardBody>
+							</Card>
+						</Col>
+						<Col md="4">
+							<Card className="card-shadow">
+								<a href="#" className="img-ho">
+									<Image
+										className="card-img-top"
+										src={img4}
+										alt="wrappixel kit"
+									/>
+								</a>
+								<CardBody>
+									<h5 className="font-medium m-b-0">Zukandre Phoniex</h5>
+									<p className="m-b-0 font-14">Branding</p>
+								</CardBody>
+							</Card>
+						</Col>
+						<Col md="4">
+							<Card className="card-shadow">
+								<a href="#" className="img-ho">
+									<Image
+										className="card-img-top"
+										src={img5}
+										alt="wrappixel kit"
+									/>
+								</a>
+								<CardBody>
+									<h5 className="font-medium m-b-0">Sionage Mokcup</h5>
+									<p className="m-b-0 font-14">Wll Mockup</p>
+								</CardBody>
+							</Card>
+						</Col>
+						<Col md="4">
+							<Card className="card-shadow">
+								<a href="#" className="img-ho">
+									<Image
+										className="card-img-top"
+										src={img6}
+										alt="wrappixel kit"
+									/>
+								</a>
+								<CardBody>
+									<h5 className="font-medium m-b-0">Hard Cover Book Mock</h5>
+									<p className="m-b-0 font-14">Book Covers</p>
+								</CardBody>
+							</Card>
+						</Col>
+					</Row>
+				</Container>
+			</div>
+			<div className="static-slider3 bg-light">
+				<Container>
+					<Row className="justify-content-center">
+						<Col md="10" className="align-self-center text-center">
+							<h1 className="title">
+								I’m Priyanka Sachan, an{" "}
+								<b className="font-bold">
+									Student, Full-stack developer & Blockchain enthusiast
+								</b>
+								, Making{" "}
+							</h1>
+							<a
+								className="btn btn-danger btn-md btn-arrow m-t-20"
+								data-toggle="collapse"
+								href="https://github.com/Priyanka-Sachan/"
+							>
+								<span>
+									Checkout My Work <i className="ti-arrow-right"></i>
+								</span>
+							</a>
+						</Col>
+					</Row>
+				</Container>
 			</div>
 		</div>
 	)

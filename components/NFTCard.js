@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useWeb3Contract, useMoralis } from "react-moralis"
 import { useRouter } from "next/router"
 import Image from "next/image"
-import { Card } from "@web3uikit/core"
+import { Card ,Loading} from "@web3uikit/core"
 import { ethers } from "ethers"
 import nftAbi from "../constants/NftCollection.json"
 
@@ -96,7 +96,11 @@ export default function NFTCard({ marketplaceAddress, nftAddress, tokenId, selle
 						</Card>
 					</div>
 				) : (
-					<div>Loading...</div>
+					<Loading
+    size={12}
+    spinnerColor="#2E7DAF"
+    spinnerType="wave"
+  />
 				)}
 			</div>
 		</div>

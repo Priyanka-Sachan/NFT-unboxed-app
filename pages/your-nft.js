@@ -8,20 +8,16 @@ export default function YourNft() {
 	const address = account
 	// const chainString = parseInt(chainId).toString()
 	const chainString = "0x61"
-	return (
+	return isWeb3Enabled ? (
 		<Container className="pt-5">
 			<h1>Your NFTs</h1>
 			<div>
-				{isWeb3Enabled ? (
-					<NFTBalance
-						address={address}
-						chain={chainString}
-						style={{ padding: "0px", margin: "0px" }}
-					/>
-				) : (
-					<div>Web3 Currently Not Enabled</div>
-				)}
+				<NFTBalance
+					address={address}
+					chain={chainString}
+					style={{ padding: "0px", margin: "0px" }}
+				/>
 			</div>
 		</Container>
-	)
+	) : null
 }

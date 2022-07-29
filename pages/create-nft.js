@@ -137,11 +137,7 @@ export default function CreateNft() {
 						onSubmit={mintNft}
 					/>
 				</div>
-			) : (
-				<div>
-					<h3>Connect to wallet to mint NFT</h3>
-				</div>
-			)}
+			) :null}
 		</Container>
 	)
 }
