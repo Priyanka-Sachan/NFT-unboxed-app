@@ -9,6 +9,7 @@ import styles from "../styles/CreateNft.module.css"
 import nftCollectionAbi from "../constants/NftCollection.json"
 import contractAddresses from "../constants/networkMapping.json"
 import { Container } from "reactstrap"
+import { TagsInput } from "react-tag-input-component"
 
 export default function CreateNft() {
 	const router = useRouter()
@@ -17,15 +18,18 @@ export default function CreateNft() {
 	const dispatch = useNotification()
 	const { runContractFunction } = useWeb3Contract()
 	const [nftImageUri, setNftImageUri] = useState("")
+	const [attributes, setAttributes] = useState([])
 
 	async function mintNft(data) {
 		console.log("Minting...")
+		console.log(data)
 		const collection = data.data[0].inputResult.split(" ").join("")
 		const name = data.data[1].inputResult
 		const description = data.data[2].inputResult
-		const attributes = {}
+		console.log(data.data[3].inputResult)
+		console.log(ethers.utils.parseUnits(data.data[3].inputResult, "ether"))
 		const price = ethers.utils.parseUnits(data.data[3].inputResult, "ether").toString()
-
+		console.log(price)
 		const nftMetadata = {
 			name: name,
 			description: description,
@@ -75,69 +79,81 @@ export default function CreateNft() {
 		<Container className="pt-5">
 			{isWeb3Enabled ? (
 				<div>
-					<h1>Create NFT</h1>
-					<IPFSInput
-						onFinish={function noRefCheck(data) {
-							setNftImageUri(data._ipfs)
-						}}
-						theme="withIcon"
-					/>
-					<Form
-						data={[
-							{
-								name: "Collection",
-								selectOptions: [
+					<h1 className="mb-3">Create NFT</h1>
+					<div className="row">
+						<div className="col-md-6">
+							<IPFSInput
+								onFinish={function noRefCheck(data) {
+									setNftImageUri(data._ipfs)
+								}}
+								theme="withIcon"
+							/>
+							<pre className="initialism mt-3" >Enter attributes as format name:value</pre>
+							<TagsInput
+								value={attributes}
+								onChange={setAttributes}
+								name="attributes"
+								placeHolder="Attributes"
+							/>
+						</div>
+						<div className="col-md-6">
+							<Form
+								data={[
 									{
-										id: "dnf",
-										label: "Devil N Fairy Club",
-										value: "DevilNFairyClub",
+										name: "Collection",
+										selectOptions: [
+											{
+												id: "dnf",
+												label: "Devil N Fairy Club",
+												value: "DevilNFairyClub",
+											},
+											{
+												id: "vw",
+												label: "Fourth World",
+												value: "FourthWorld",
+											},
+											{
+												id: "ani",
+												label: "Jungle Book Shelf",
+												value: "JungleBookShelf",
+											},
+										],
+										type: "select",
+										value: "",
 									},
 									{
-										id: "vw",
-										label: "Fourth World",
-										value: "FourthWorld",
+										inputWidth: "100%",
+										name: "Name",
+										type: "text",
+										validation: {
+											required: true,
+										},
+										value: "",
 									},
 									{
-										id: "ani",
-										label: "Jungle Book Shelf",
-										value: "JungleBookShelf",
+										inputWidth: "100%",
+										name: "Description",
+										type: "textarea",
+										validation: {
+											required: true,
+										},
+										value: "",
 									},
-								],
-								type: "select",
-								value: "",
-							},
-							{
-								inputWidth: "100%",
-								name: "Name",
-								type: "text",
-								validation: {
-									required: true,
-								},
-								value: "",
-							},
-							{
-								inputWidth: "100%",
-								name: "Description",
-								type: "textarea",
-								validation: {
-									required: true,
-								},
-								value: "",
-							},
-							{
-								name: "Price",
-								type: "number",
-								validation: {
-									numberMin: 0.1,
-									required: true,
-								},
-								value: "",
-							},
-						]}
-						onSubmit={mintNft}
-					/>
+									{
+										name: "Price",
+										type: "number",
+										validation: {
+											required: true,
+										},
+										value: "",
+									},
+								]}
+								onSubmit={mintNft}
+							/>
+						</div>
+					</div>
 				</div>
-			) :null}
+			) : null}
 		</Container>
 	)
 }

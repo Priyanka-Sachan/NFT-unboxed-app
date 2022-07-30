@@ -1,12 +1,13 @@
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 import { useMoralis, useMoralisQuery, useWeb3Contract } from "react-moralis"
-import { useNotification, Button, Loading } from "@web3uikit/core"
+import { useNotification, Button, Loading, Information } from "@web3uikit/core"
 import UpdateListingModal from "../../components/UpdateListingModal"
 import nftMarketplaceAbi from "../../constants/NftMarketplace.json"
 import nftAbi from "../../constants/NftCollection.json"
 import Image from "next/image"
 import { Container } from "reactstrap"
+import { Moralis } from "moralis-v1"
 
 export default function Nft({ nftAddress, tokenId }) {
 	const router = useRouter()
@@ -23,7 +24,7 @@ export default function Nft({ nftAddress, tokenId }) {
 	const [imageURI, setImageURI] = useState("")
 	const [tokenName, setTokenName] = useState("")
 	const [tokenDescription, setTokenDescription] = useState("")
-	const [tokenAttributes, setTokenAttributes] = useState("")
+	const [tokenAttributes, setTokenAttributes] = useState([])
 
 	const [showModal, setShowModal] = useState(false)
 	const hideModal = () => setShowModal(false)
@@ -59,7 +60,7 @@ export default function Nft({ nftAddress, tokenId }) {
 				setImageURI(imageURIURL)
 				setTokenName(tokenURIResponse.name)
 				setTokenDescription(tokenURIResponse.description)
-				// setTokenAttributes(tokenURIResponse.attributes)
+				setTokenAttributes(tokenURIResponse.attributes)
 			}
 		}
 	}
@@ -144,32 +145,62 @@ export default function Nft({ nftAddress, tokenId }) {
 						onClose={hideModal}
 					/>
 					<div>
-						<h1>{tokenName}</h1>
-						<h3>
-							{nftAddress}#{tokenId}
-						</h3>
-						<h4 className="italics"> Owned by {seller}</h4>
-						<h4>Buy at {price}</h4>
-						<Image
-							loader={() => imageURI}
-							src={imageURI}
-							width="400"
-							height="400"
-						></Image>
-						<h5>{tokenDescription}</h5>
-						<h4>{tokenAttributes}</h4>
-						{account == seller ? (
-							<div>
-								<Button
-									text="UPDATE"
-									theme="secondary"
-									onClick={updateNftHandler}
-								/>
-								<Button text="CANCEL" theme="outline" onClick={cancelNftHandler} />
+						<div className="row">
+							<div className="col-md-6">
+								<Image
+									loader={() => imageURI}
+									src={imageURI}
+									width="400"
+									height="400"
+								></Image>
+								<div
+									style={{
+										display: "flex",
+										gap: "8px",
+										flexWrap: "wrap",
+									}}
+								>
+									{tokenAttributes.map((tokenAttribute) => (
+										<Information
+											style={{ width: "fit-content" }}
+											information={tokenAttribute
+												.split(":")[1]
+												.toUpperCase()}
+											topic={tokenAttribute.split(":")[0].toUpperCase()}
+										></Information>
+									))}
+								</div>
 							</div>
-						) : (
-							<Button text="BUY NFT" theme="secondary" onClick={buyNftHandler} />
-						)}
+							<div className="col-md-6">
+								<h1>{tokenName}</h1>
+								<h3 className="text-muted">
+									{nftAddress}#{tokenId}
+								</h3>
+								<h4 className="italics"> Owned by {seller}</h4>
+								<h4>Buy at {Moralis.Units.FromWei(price, 18)} ETH 🪙</h4>
+								<h5>{tokenDescription}</h5>
+								{account == seller ? (
+									<div style={{ display: "flex", gap: "8px" }}>
+										<Button
+											text="UPDATE"
+											theme="secondary"
+											onClick={updateNftHandler}
+										/>
+										<Button
+											text="CANCEL"
+											theme="outline"
+											onClick={cancelNftHandler}
+										/>
+									</div>
+								) : (
+									<Button
+										text="BUY NFT"
+										theme="secondary"
+										onClick={buyNftHandler}
+									/>
+								)}
+							</div>
+						</div>
 					</div>
 				</div>
 			) : (
