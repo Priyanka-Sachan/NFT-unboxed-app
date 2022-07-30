@@ -8,12 +8,12 @@ import f1 from "../assets/images/f1.svg"
 import f2 from "../assets/images/f2.svg"
 import f3 from "../assets/images/f3.svg"
 import f4 from "../assets/images/f4.svg"
-import img1 from "../assets/images/img1.jpg"
-import img2 from "../assets/images/img2.jpg"
-import img3 from "../assets/images/img3.jpg"
-import img4 from "../assets/images/img4.jpg"
-import img5 from "../assets/images/img5.jpg"
-import img6 from "../assets/images/img6.jpg"
+import img1 from "../assets/images/img1.svg"
+import img2 from "../assets/images/img2.png"
+import img3 from "../assets/images/img3.png"
+import img4 from "../assets/images/img4.png"
+import img5 from "../assets/images/img5.png"
+import img6 from "../assets/images/img6.svg"
 
 export default function Home() {
 	return (
@@ -151,13 +151,13 @@ export default function Home() {
 				<Container>
 					<Row className="justify-content-center">
 						<Col md="7" className="text-center">
-							<h2 className="title">Our Tending collections</h2>
+							<h2 className="title">Our Trending collections</h2>
 						</Col>
 					</Row>
 					<Row className="m-t-40">
 						<Col md="4">
 							<Card className="card-shadow">
-								<a href="#" className="img-ho">
+								<a href="#" className="img-ho" style={{ height: "250px" }}>
 									<Image
 										className="card-img-top"
 										src={img1}
@@ -166,15 +166,15 @@ export default function Home() {
 								</a>
 								<CardBody>
 									<h5 className="font-medium m-b-0">
-										Branding for Theme Designer
+										Witch with the purple hat
 									</h5>
-									<p className="m-b-0 font-14">Digital Marketing</p>
+									<p className="m-b-0 font-14">DevilNFairyClub</p>
 								</CardBody>
 							</Card>
 						</Col>
 						<Col md="4">
 							<Card className="card-shadow">
-								<a href="#" className="img-ho">
+								<a href="#" className="img-ho" style={{ height: "250px" }}>
 									<Image
 										className="card-img-top"
 										src={img2}
@@ -182,14 +182,14 @@ export default function Home() {
 									/>
 								</a>
 								<CardBody>
-									<h5 className="font-medium m-b-0">Button Designs Free</h5>
-									<p className="m-b-0 font-14">Search Engine</p>
+									<h5 className="font-medium m-b-0">House with 10 windows</h5>
+									<p className="m-b-0 font-14">FourthWorld</p>
 								</CardBody>
 							</Card>
 						</Col>
 						<Col md="4">
 							<Card className="card-shadow">
-								<a href="#" className="img-ho">
+								<a href="#" className="img-ho" style={{ height: "250px" }}>
 									<Image
 										className="card-img-top"
 										src={img3}
@@ -197,14 +197,14 @@ export default function Home() {
 									/>
 								</a>
 								<CardBody>
-									<h5 className="font-medium m-b-0">Branding & Co Agency</h5>
-									<p className="m-b-0 font-14">Admin templates</p>
+									<h5 className="font-medium m-b-0">The Learned Elephant</h5>
+									<p className="m-b-0 font-14">JungleBookShelf</p>
 								</CardBody>
 							</Card>
 						</Col>
 						<Col md="4">
 							<Card className="card-shadow">
-								<a href="#" className="img-ho">
+								<a href="#" className="img-ho" style={{ height: "250px" }}>
 									<Image
 										className="card-img-top"
 										src={img4}
@@ -212,14 +212,14 @@ export default function Home() {
 									/>
 								</a>
 								<CardBody>
-									<h5 className="font-medium m-b-0">Zukandre Phoniex</h5>
-									<p className="m-b-0 font-14">Branding</p>
+									<h5 className="font-medium m-b-0">One storey boutique shop</h5>
+									<p className="m-b-0 font-14">FourthWorld</p>
 								</CardBody>
 							</Card>
 						</Col>
 						<Col md="4">
 							<Card className="card-shadow">
-								<a href="#" className="img-ho">
+								<a href="#" className="img-ho" style={{ height: "250px" }}>
 									<Image
 										className="card-img-top"
 										src={img5}
@@ -227,14 +227,14 @@ export default function Home() {
 									/>
 								</a>
 								<CardBody>
-									<h5 className="font-medium m-b-0">Sionage Mokcup</h5>
-									<p className="m-b-0 font-14">Wll Mockup</p>
+									<h5 className="font-medium m-b-0">Bear with honey combo</h5>
+									<p className="m-b-0 font-14">JungleBookShelf</p>
 								</CardBody>
 							</Card>
 						</Col>
 						<Col md="4">
 							<Card className="card-shadow">
-								<a href="#" className="img-ho">
+								<a href="#" className="img-ho" style={{ height: "250px" }}>
 									<Image
 										className="card-img-top"
 										src={img6}
@@ -242,8 +242,8 @@ export default function Home() {
 									/>
 								</a>
 								<CardBody>
-									<h5 className="font-medium m-b-0">Hard Cover Book Mock</h5>
-									<p className="m-b-0 font-14">Book Covers</p>
+									<h5 className="font-medium m-b-0">Knight with armor</h5>
+									<p className="m-b-0 font-14">DevilNFairyClub</p>
 								</CardBody>
 							</Card>
 						</Col>

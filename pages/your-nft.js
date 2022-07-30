@@ -6,8 +6,8 @@ import { Container } from "reactstrap"
 export default function YourNft() {
 	const { chainId, account, isWeb3Enabled } = useMoralis()
 	const address = account
-	// const chainString = parseInt(chainId).toString()
-	const chainString = "0x61"
+	const chainString = parseInt(chainId).toString()
+	// const chainString = "0x61"
 	return isWeb3Enabled ? (
 		<Container className="pt-5">
 			<h1>Your NFTs</h1>
