@@ -1,4 +1,3 @@
-import styles from "../styles/Explore.module.css"
 import { useMoralisQuery, useMoralis } from "react-moralis"
 import NFTCard from "../components/NFTCard"
 import { Container } from "reactstrap"

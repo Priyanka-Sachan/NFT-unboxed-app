@@ -1,4 +1,3 @@
-import styles from "../styles/YourNft.module.css"
 import { useMoralis } from "react-moralis"
 import { NFTBalance } from "@web3uikit/web3"
 import { Container } from "reactstrap"
