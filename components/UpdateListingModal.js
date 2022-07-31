@@ -48,7 +48,6 @@ export default function UpdateListingModal({
 				updateItem({
 					onError: (error) => {
 						console.log(error)
-						console.log(updateItem)
 					},
 					onSuccess: handleUpdateListingSuccess,
 				})

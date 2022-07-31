@@ -6,8 +6,10 @@ import nftAbi from "../constants/NftCollection.json"
 import nftMarketplaceAbi from "../constants/NftMarketplace.json"
 import networkMapping from "../constants/networkMapping.json"
 import { Container } from "reactstrap"
+import { useRouter } from "next/router"
 
 export default function SellNft() {
+	const router = useRouter()
 	const { chainId, account, isWeb3Enabled } = useMoralis()
 	const chainString = chainId ? parseInt(chainId).toString() : "31337"
 	const marketplaceAddress = networkMapping[chainString].NftMarketplace
@@ -22,7 +24,6 @@ export default function SellNft() {
 		const tokenId = data.data[1].inputResult
 		const price = ethers.utils.parseUnits(data.data[2].inputResult, "ether").toString()
 
-		console.log("@1")
 		const approveOptions = {
 			abi: nftAbi,
 			contractAddress: nftAddress,
@@ -70,6 +71,7 @@ export default function SellNft() {
 			title: "NFT listed",
 			position: "topR",
 		})
+		router.push("/explore")
 	}
 
 	const handleWithdrawSuccess = async (tx) => {

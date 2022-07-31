@@ -4,7 +4,7 @@ import Moralis from "moralis-v1"
 import { useMoralis, useWeb3Contract } from "react-moralis"
 import { ethers } from "ethers"
 import { IPFSInput } from "@web3uikit/web3"
-import { Form, useNotification } from "@web3uikit/core"
+import { Form, useNotification, Button } from "@web3uikit/core"
 import styles from "../styles/CreateNft.module.css"
 import nftCollectionAbi from "../constants/NftCollection.json"
 import contractAddresses from "../constants/networkMapping.json"
@@ -23,55 +23,58 @@ export default function CreateNft() {
 	async function mintNft(data) {
 		console.log("Minting...")
 		console.log(data)
-		const collection = data.data[0].inputResult.split(" ").join("")
-		const name = data.data[1].inputResult
-		const description = data.data[2].inputResult
-		console.log(data.data[3].inputResult)
-		console.log(ethers.utils.parseUnits(data.data[3].inputResult, "ether"))
-		const price = ethers.utils.parseUnits(data.data[3].inputResult, "ether").toString()
-		console.log(price)
-		const nftMetadata = {
-			name: name,
-			description: description,
-			image: nftImageUri,
-			attributes: attributes,
-		}
-		const file = new Moralis.File("file.json", { base64: btoa(JSON.stringify(nftMetadata)) })
-		await file.saveIPFS()
-		const nftTokenUri = file.ipfs()
-
-		console.log(contractAddresses)
-		const nftAddress = contractAddresses[chainString][collection]
-		const mintOptions = {
-			abi: nftCollectionAbi,
-			contractAddress: nftAddress,
-			functionName: "mintNft",
-			params: {
-				tokenUri: nftTokenUri,
-				price: price,
-			},
-		}
-		console.log(mintOptions)
-
-		await runContractFunction({
-			params: mintOptions,
-			onSuccess: handleMintSuccess,
-			onError: (error) => {
-				console.log(error)
-			},
-		})
-
-		async function handleMintSuccess(tx) {
-			const txReciept = await tx.wait(1)
-			const tokenId = txReciept.events[0].args.tokenId.toString()
-			console.log(`Minted NFT at address ${nftAddress} & token is ${tokenId}`)
-			dispatch({
-				type: "success",
-				message: `At address ${nftAddress} & token ${tokenId}`,
-				title: "NFT Minted",
-				position: "topR",
+		if (
+			data.data[0].inputResult &&
+			data.data[1].inputResult &&
+			data.data[2].inputResult &&
+			data.data[3].inputResult
+		) {
+			const collection = data.data[0].inputResult.split(" ").join("")
+			const nftAddress = contractAddresses[chainString][collection]
+			const name = data.data[1].inputResult
+			const description = data.data[2].inputResult
+			const price = ethers.utils.parseUnits(data.data[3].inputResult, "ether").toString()
+			const nftMetadata = {
+				name: name,
+				description: description,
+				image: nftImageUri,
+				attributes: attributes,
+			}
+			const file = new Moralis.File("file.json", {
+				base64: btoa(JSON.stringify(nftMetadata)),
 			})
-			router.push("/your-nft")
+			await file.saveIPFS()
+			const nftTokenUri = file.ipfs()
+			const mintOptions = {
+				abi: nftCollectionAbi,
+				contractAddress: nftAddress,
+				functionName: "mintNft",
+				params: {
+					tokenUri: nftTokenUri,
+					price: price,
+				},
+			}
+			console.log(mintOptions)
+			await runContractFunction({
+				params: mintOptions,
+				onSuccess: handleMintSuccess,
+				onError: (error) => {
+					console.log(error)
+				},
+			})
+
+			async function handleMintSuccess(tx) {
+				const txReciept = await tx.wait(1)
+				const tokenId = txReciept.events[0].args.tokenId.toString()
+				console.log(`Minted NFT at address ${nftAddress} & token is ${tokenId}`)
+				dispatch({
+					type: "success",
+					message: `At address ${nftAddress} & token ${tokenId}`,
+					title: "NFT Minted",
+					position: "topR",
+				})
+				router.push("/your-nft")
+			}
 		}
 	}
 
@@ -88,7 +91,9 @@ export default function CreateNft() {
 								}}
 								theme="withIcon"
 							/>
-							<pre className="initialism mt-3" >Enter attributes as format name:value</pre>
+							<pre className="initialism mt-3">
+								Enter attributes as format name:value
+							</pre>
 							<TagsInput
 								value={attributes}
 								onChange={setAttributes}
@@ -98,6 +103,7 @@ export default function CreateNft() {
 						</div>
 						<div className="col-md-6">
 							<Form
+								id="create-nft-form"
 								data={[
 									{
 										name: "Collection",
@@ -145,10 +151,11 @@ export default function CreateNft() {
 										validation: {
 											required: true,
 										},
-										value: "",
+										value: 0,
 									},
 								]}
 								onSubmit={mintNft}
+								customFooter={<Button type="submit" text="Submit" />}
 							/>
 						</div>
 					</div>

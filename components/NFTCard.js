@@ -42,11 +42,11 @@ export default function NFTCard({ marketplaceAddress, nftAddress, tokenId, selle
 		if (tokenURI) {
 			// IPFS Gateway: A server that will return IPFS files from a "normal" URL.
 			let requestURL = tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/")
-			requestURL = tokenURI.replace("ipfs.moralis.io:2053", "gateway.moralisipfs.com")
+			requestURL = tokenURI.replace("ipfs.moralis.io:2053", "ipfs.io")
 			const tokenURIResponse = await (await fetch(requestURL)).json()
 			const imageURI = tokenURIResponse.image
 			let imageURIURL = imageURI.replace("ipfs://", "https://ipfs.io/ipfs/")
-			imageURIURL = imageURI.replace("ipfs.moralis.io:2053", "gateway.moralisipfs.com")
+			imageURIURL = imageURI.replace("ipfs.moralis.io:2053", "ipfs.io")
 			setImageURI(imageURIURL)
 			setTokenName(tokenURIResponse.name)
 			setTokenDescription(tokenURIResponse.description)
