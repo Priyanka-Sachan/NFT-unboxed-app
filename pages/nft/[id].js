@@ -53,10 +53,12 @@ export default function Nft({ nftAddress, tokenId }) {
 			console.log(`The TokenURI is ${tokenURI}`)
 			if (tokenURI) {
 				// IPFS Gateway: A server that will return IPFS files from a "normal" URL.
-				const requestURL = tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/")
+				let requestURL = tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/")
+				requestURL = tokenURI.replace("ipfs.moralis.io:2053", "gateway.moralisipfs.com")
 				const tokenURIResponse = await (await fetch(requestURL)).json()
 				const imageURI = tokenURIResponse.image
-				const imageURIURL = imageURI.replace("ipfs://", "https://ipfs.io/ipfs/")
+				let imageURIURL = imageURI.replace("ipfs://", "https://ipfs.io/ipfs/")
+				imageURIURL = imageURI.replace("ipfs.moralis.io:2053", "gateway.moralisipfs.com")
 				setImageURI(imageURIURL)
 				setTokenName(tokenURIResponse.name)
 				setTokenDescription(tokenURIResponse.description)
